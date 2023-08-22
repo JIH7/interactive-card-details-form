@@ -2,4 +2,28 @@
   font-family: "Space Grotesk", sans-serif;
 }
 
+.bg-mobile {
+  position: absolute;
+  width: 100%;
+  height: auto;
+  top: 0;
+  left: 0;
+}
+
+.bg-desktop {
+  display: none;
+}
+
+.card-front {
+  top: 126px;
+  left: 17px;
+  z-index: 2;
+}
+
+.card-back {
+  top: 32px;
+  right: 16px;
+  z-index: 1;
+}
+
 /*# sourceMappingURL=App.css.map */

@@ -1,0 +1,53 @@
+#form {
+  padding: 0 24px;
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  color: #21092F;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+input[type=text] {
+  height: 45px;
+  border-radius: 8px;
+  margin-top: 9px;
+  margin-bottom: 20px;
+  padding-left: 16px;
+}
+
+input[type=submit] {
+  height: 53px;
+  border-radius: 8px;
+  background-color: #21092F;
+  color: white;
+}
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+  max-width: 100%;
+}
+.flex-row label {
+  width: 50%;
+}
+
+#card-exp-mm,
+#card-exp-yy {
+  width: 25%;
+  margin-right: 8px;
+}
+
+@media only screen and (min-width: 1080px) {
+  #form {
+    width: 385px;
+  }
+}
+
+/*# sourceMappingURL=Form.css.map */

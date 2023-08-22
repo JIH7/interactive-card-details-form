@@ -1,7 +1,12 @@
 import { useState } from 'react'
 import './css/App.css'
+
+import backgroundDesktop from "./assets/bg-main-desktop.png"
+import backgroundMobile from "./assets/bg-main-mobile.png"
+
 import CardFront from './components/CardFront'
 import CardBack from './components/CardBack';
+import Form from './components/Form'
 
 function App() {
   const [cardNum, setCardNum] = useState("0000 0000 0000 0000");
@@ -11,8 +16,11 @@ function App() {
 
   return (
     <>
-      {/* <CardFront cardNum={cardNum} cardName={cardName} cardDate={cardDate}/> */}
-      <CardBack cardCvc={cardCvc} />
+      {/* <img className='bg-mobile' src={backgroundMobile} alt="bg-mobile" />
+      <img className='bg-desktop' src={backgroundDesktop} alt="bg-desktop" />
+      <CardFront cardNum={cardNum} cardName={cardName} cardDate={cardDate}/>
+      <CardBack cardCvc={cardCvc} /> */}
+      <Form />
     </>
   )
 }
