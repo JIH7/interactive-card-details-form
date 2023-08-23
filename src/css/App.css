@@ -42,6 +42,16 @@ body {
   z-index: 1;
 }
 
+@media only screen and (min-width: 768px) {
+  .card-front {
+    top: 240px;
+    left: 20%;
+  }
+  .card-back {
+    top: 160px;
+    right: 20%;
+  }
+}
 @media only screen and (min-width: 1080px) {
   .bg-mobile {
     display: none;
