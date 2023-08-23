@@ -6,20 +6,39 @@ function Form(props: {
   setCardNum: Function,
   setCardName: Function,
   setCardDate: Function,
-  setCardCvc: Function
+  setCardCvc: Function,
+  setFormComplete: Function
 }) {
   const [cardNameErr, setCardNameErr] = useState("");
   const [cardNumErr, setCardNumErr] = useState("");
   const [cardExpErr, setCardExpErr] = useState("");
   const [cardCvcErr, setCardCvcErr] = useState("");
 
+  const validateName = (name: string): boolean => {
+    if(name === "") {
+        setCardNameErr("Name may not be empty");
+        return false;
+    }
 
+    const valid = /^[A-Za-z\s]*$/.test(name);
+    if(!valid)
+        setCardNameErr("Wrong format, letters and spaces only")
+
+    return valid;
+  }
+
+  const isNum = (val: string) => {
+    return /^\d+$/.test(val)
+  }
 
   const luhnCheck = (cardNum: string): boolean => {
-    if(cardNum === '')
-    {
+    if(cardNum === '') {
       setCardNumErr("Card number cannot be empty")
       return false;
+    }
+    if(!isNum(cardNum)) {
+        setCardNumErr("Wrong format, numbers only")
+        return false;
     }
 
     const arr = cardNum
@@ -61,6 +80,28 @@ function Form(props: {
   }
 
   const dateCheck = (mm: string, yy:string): boolean => { //Returns true if card date is not in the past
+    if (mm === "") {
+        setCardExpErr("Month may not be empty");
+        return false;
+    }
+    if (!(isNum(mm) && isNum(yy))) {
+        setCardExpErr("Wrong format, numbers only")
+        return false;
+    }
+    const mmInt = parseInt(mm);
+    if (mmInt > 12 || mmInt < 1) {
+        setCardExpErr("Month must be between 01 and 12");
+        return false;
+    }
+    if (yy === "") {
+        setCardExpErr("Year may not be empty");
+        return false;
+    }
+    if (!(mm.length === 2 && yy.length === 2)) {
+        setCardExpErr("Expiry must be in MM/YY format")
+        return false;
+    }
+
     const now = new Date();
     const currentYear = now.getFullYear();
     const cardYear = 2000 + parseInt(yy);
@@ -80,9 +121,8 @@ function Form(props: {
   }
 
   const cvcCheck = (cvc: string): boolean => {
-    const cvcNum = parseInt(cvc);
-    if(!(cvcNum.toString().length === cvc.length)) {
-      setCardCvcErr("CVC must be numbers only.")
+    if(!isNum(cvc)) {
+      setCardCvcErr("Wrong format, numbers only")
       return false;
     } else if(cvc.length !== 3) {
       setCardCvcErr("CVC must be exactly 3 numbers.")
@@ -108,11 +148,13 @@ function Form(props: {
     const cardExpYy = target.cardExpYy.value;
     const cardCvc = target.cardCvc.value;
 
-    let infoIsGood: boolean = luhnCheck(cardNumber);
+    let infoIsGood: boolean = validateName(cardName);
+    if(!luhnCheck(cardNumber))
+        infoIsGood = false;
     if(!dateCheck(cardExpMm, cardExpYy))
-      infoIsGood = false;
+        infoIsGood = false;
     if(!cvcCheck(cardCvc.toString()))
-      infoIsGood = false;
+        infoIsGood = false;
 
     if(infoIsGood) {
       setCardNameErr("");
@@ -120,9 +162,11 @@ function Form(props: {
       setCardNumErr("");
       props.setCardNum(addSpaces(cardNumber));
       setCardExpErr("");
-      props.setCardDate(`${cardExpMm}/${cardExpYy}`)
+      props.setCardDate(`${cardExpMm}/${cardExpYy}`);
       setCardCvcErr("");
-      props.setCardCvc(cardCvc)
+      props.setCardCvc(cardCvc);
+
+      props.setFormComplete(true);
     }
   }
 
