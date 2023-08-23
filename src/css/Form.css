@@ -1,5 +1,8 @@
 #form {
-  padding: 0 24px;
+  position: relative;
+  margin-top: 330px;
+  padding: 0 6px;
+  width: 330px;
   display: flex;
   flex-direction: column;
 }
@@ -44,9 +47,41 @@ input[type=submit] {
   margin-right: 8px;
 }
 
+.err-text {
+  position: absolute;
+  color: #FF5050;
+  font-size: 12px;
+  left: 10px;
+}
+.err-text.name {
+  bottom: 247px;
+}
+.err-text.number {
+  bottom: 152px;
+}
+.err-text.date {
+  bottom: 57px;
+}
+.err-text.cvc {
+  bottom: 57px;
+  left: 150px;
+}
+
+@media only screen and (min-width: 768px) {
+  #form {
+    margin-top: 550px;
+  }
+}
 @media only screen and (min-width: 1080px) {
   #form {
+    position: absolute;
+    right: 10%;
+    top: 25%;
+    margin-top: 0;
     width: 385px;
+  }
+  .err-text.cvc {
+    left: 205px;
   }
 }
 

@@ -16,11 +16,11 @@ function App() {
 
   return (
     <>
-      {/* <img className='bg-mobile' src={backgroundMobile} alt="bg-mobile" />
+      <img className='bg-mobile' src={backgroundMobile} alt="bg-mobile" />
       <img className='bg-desktop' src={backgroundDesktop} alt="bg-desktop" />
       <CardFront cardNum={cardNum} cardName={cardName} cardDate={cardDate}/>
-      <CardBack cardCvc={cardCvc} /> */}
-      <Form />
+      <CardBack cardCvc={cardCvc} />
+      <Form setCardNum={setCardNum} setCardName={setCardName} setCardDate={setCardDate} setCardCvc={setCardCvc} />
     </>
   )
 }
