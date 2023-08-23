@@ -22,8 +22,9 @@ function Form(props: {
 
     const valid = /^[A-Za-z\s]*$/.test(name);
     if(!valid)
-        setCardNameErr("Wrong format, letters and spaces only")
-
+        setCardNameErr("Wrong format, letters and spaces only");
+    else
+        setCardNameErr("");
     return valid;
   }
 
@@ -58,7 +59,13 @@ function Form(props: {
         }, val)) : val))
     );
     sum += lastDigit ? lastDigit : 0;
-    return sum % 10 === 0;
+    const answer = sum % 10 === 0;
+    
+    if(!answer)
+        setCardNumErr("Invalid card number");
+    else
+        setCardNumErr("");
+    return answer;
   }
 
   const addSpaces = (cardNum: string): string => { //Adds spaces to card number format
@@ -125,7 +132,7 @@ function Form(props: {
       setCardCvcErr("Wrong format, numbers only")
       return false;
     } else if(cvc.length !== 3) {
-      setCardCvcErr("CVC must be exactly 3 numbers.")
+      setCardCvcErr("Must be three numbers")
       return false;
     }
     return true;
@@ -173,10 +180,10 @@ function Form(props: {
   return (
     <form id="form" onSubmit={handleSubmit}>
       <label htmlFor="cardholder-name">Cardholder Name</label>
-      <input id="cardholder-name" name="cardholderName" placeholder="e.g. Jane Appleseed" type="text" />
+      <input id="cardholder-name" className={cardNameErr === "" ? "" : "err-inp"} name="cardholderName" placeholder="e.g. Jane Appleseed" type="text" />
       <span className="err-text name">{cardNameErr}</span>
       <label htmlFor="card-number">Card Number</label>
-      <input id="card-number" name="cardNumber" placeholder="e.g. 1234 5678 9123 0000" type="text" />
+      <input id="card-number" className={cardNumErr === "" ? "" : "err-inp"} name="cardNumber" placeholder="e.g. 1234 5678 9123 0000" type="text" />
       <span className="err-text number">{cardNumErr}</span>
       <div id="form-bottom">
         <div className="flex-row">
@@ -184,9 +191,9 @@ function Form(props: {
             <label htmlFor="card-cvc">CVC</label>
         </div>
         <div className="flex-row">
-            <input id="card-exp-mm" name="cardExpMm" placeholder="MM" type="text" />
-            <input id="card-exp-yy" name="cardExpYy" placeholder="YY" type="text" />
-            <input id="card-cvc" name="cardCvc" placeholder="e.g. 123" type="text" />
+            <input id="card-exp-mm" className={cardExpErr === "" ? "" : "err-inp"} name="cardExpMm" placeholder="MM" type="text" />
+            <input id="card-exp-yy" className={cardExpErr === "" ? "" : "err-inp"} name="cardExpYy" placeholder="YY" type="text" />
+            <input id="card-cvc" className={cardCvcErr === "" ? "" : "err-inp"} name="cardCvc" placeholder="e.g. 123" type="text" />
         </div>
         <div className="flex-row">
         <span className="err-text date">{cardExpErr}</span>

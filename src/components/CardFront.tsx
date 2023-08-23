@@ -4,13 +4,13 @@ import "../css/CardFront.css"
 
 function CardFront(props: {cardNum: string, cardName: string, cardDate: string}) {
   return (
-    <div className="card-front">
+    <aside className="card-front">
       <img className="card-img" src={cardImg} alt="card-front" />
       <img className="card-logo" src={cardLogo} alt="card-logo" />
       <span className="card-num">{props.cardNum}</span>
       <span className="card-name">{props.cardName}</span>
       <span className="card-date">{props.cardDate}</span>
-    </div>
+    </aside>
   )
 }
 
